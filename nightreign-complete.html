@@ -535,9 +535,9 @@
                 );
             }, [spawnGroups, searchTerm]);
 
-            const getImageUrl = (nightlord, patternId) => {
+            const getImageUrl = (pattern) => {
                 const baseUrl = 'https://raw.githubusercontent.com/LucasValpereiro/NIGHTREIGN/main/public';
-                const url = `${baseUrl}/${nightlord}/${patternId}.jpg`;
+                const url = `${baseUrl}/${pattern.image}.jpg`;
                 console.log('🔍 Tentando carregar:', url);
                 return url;
             };
@@ -612,7 +612,7 @@
                                                 <div key={spawn} className="bg-slate-700/50 rounded-xl overflow-hidden border-2 border-slate-600 hover:border-purple-500 transition-all">
                                                     <div className="aspect-video bg-slate-900 relative cursor-pointer" onClick={() => setSelectedPattern(firstPattern)}>
                                                         <img
-                                                            src={getImageUrl(selectedNightlord, firstPattern.id)}
+                                                            src={getImageUrl(firstPattern)}
                                                             alt={spawn}
                                                             className="w-full h-full object-cover"
                                                             onError={(e) => {
@@ -698,7 +698,7 @@
                                         <div className="bg-slate-900 p-6">
                                             <div className="max-w-4xl mx-auto">
                                                 <img
-                                                    src={getImageUrl(selectedNightlord, selectedPattern.id)}
+                                                    src={getImageUrl(selectedPattern)}
                                                     alt={`Mapa Seed ${selectedPattern.id}`}
                                                     className="w-full rounded-xl border-4 border-purple-500/50 shadow-2xl"
                                                     onError={(e) => {

@@ -175,55 +175,55 @@
 
             const translate = (text) => translations[text] || text;
 
-            const newPatterns = allPatterns.map(pattern => {
-                if (spawnUrls.some(spawnUrl => spawnUrl.includes(pattern.id))) {
-                    return { ...pattern, spawnUrl }
-                }
-
-                return pattern;
-            })
+            const newPatterns = Object.keys(allPatterns).reduce((acc, nightlord) => {
+    acc[nightlord] = allPatterns[nightlord].map(pattern => ({
+        ...pattern,
+        spawnUrl: spawnUrls[pattern.id] || null
+    }));
+    return acc;
+}, {});
 
             const spawnUrls = [
-    "https://s3.amazonaws.com/files.trilogo.app/grupos/320/0fde6629-0fce-49ee-9e21-dae49bd3aa0e/59.jpg".includes(pattern.id),
-    "https://s3.amazonaws.com/files.trilogo.app/grupos/320/3b918cbf-3cb6-471d-aa1d-d988175adb9a/55.jpg",
-    "https://s3.amazonaws.com/files.trilogo.app/grupos/320/fdd5d8c5-b044-4aa8-b1fa-1983c860fed0/65.jpg",
-    "https://s3.amazonaws.com/files.trilogo.app/grupos/320/decc5248-a3f2-4649-8c8f-ac9ada90ed47/56.jpg",
-    "https://s3.amazonaws.com/files.trilogo.app/grupos/320/b7af77ad-06db-45b7-b835-2474327ca7a0/54.jpg",
-    "https://s3.amazonaws.com/files.trilogo.app/grupos/320/3eb0aa03-b048-4962-a9c8-d2a5ba5b758a/72.jpg",
-    "https://s3.amazonaws.com/files.trilogo.app/grupos/320/b5c1383f-0eb0-40d0-a95c-9c7f2cd55d1b/67.jpg",
-    "https://s3.amazonaws.com/files.trilogo.app/grupos/320/f5df9608-506c-4471-9395-3341b1bc0432/79.jpg",
-    "https://s3.amazonaws.com/files.trilogo.app/grupos/320/15d970ad-4616-4061-8e5e-80ec4580eb01/61.jpg",
-    "https://s3.amazonaws.com/files.trilogo.app/grupos/320/8c2aadef-1830-4412-9d8e-1998f3d799e1/68.jpg",
-    "https://s3.amazonaws.com/files.trilogo.app/grupos/320/bd31066d-61c0-4d9c-a9a3-7d1e140aa66f/47.jpg",
-    "https://s3.amazonaws.com/files.trilogo.app/grupos/320/5535374e-d2a4-4b26-9fce-584a7a743ca9/76.jpg",
-    "https://s3.amazonaws.com/files.trilogo.app/grupos/320/8f0e8275-b250-4ea5-bf05-d67a27bc76a8/69.jpg",
-    "https://s3.amazonaws.com/files.trilogo.app/grupos/320/3feae063-d0f8-42c4-984e-bd881d48d46b/57.jpg",
-    "https://s3.amazonaws.com/files.trilogo.app/grupos/320/0894e093-fb77-4a36-8e93-2338db453379/78.jpg",
-    "https://s3.amazonaws.com/files.trilogo.app/grupos/320/f82478a6-f354-44d4-b2e2-0fba27b10d39/62.jpg",
-    "https://s3.amazonaws.com/files.trilogo.app/grupos/320/d02eb767-d20d-4b25-9f7b-0cbac2d1bc64/58.jpg",
-    "https://s3.amazonaws.com/files.trilogo.app/grupos/320/621e6072-da44-496f-95c3-fa4eb5f378c2/66.jpg",
-    "https://s3.amazonaws.com/files.trilogo.app/grupos/320/13d214e6-eb3d-4f56-8808-0dd96ea72605/45.jpg",
-    "https://s3.amazonaws.com/files.trilogo.app/grupos/320/8fa12574-31a7-449d-91d9-e28ce655a35e/51.jpg",
-    "https://s3.amazonaws.com/files.trilogo.app/grupos/320/6df79605-c6f2-4de4-b0d6-057868310402/46.jpg",
-    "https://s3.amazonaws.com/files.trilogo.app/grupos/320/6faa4cfe-3e47-4be1-b94e-59b8dcfbaaaa/52.jpg",
-    "https://s3.amazonaws.com/files.trilogo.app/grupos/320/c7208a46-5758-4bd2-83a8-6fdebdf155d7/43.jpg",
-    "https://s3.amazonaws.com/files.trilogo.app/grupos/320/58fb2489-131f-4a2f-9bd7-1232138dd284/50.jpg",
-    "https://s3.amazonaws.com/files.trilogo.app/grupos/320/26ea08c7-13f8-41a4-9ce0-5d3160eb4933/42.jpg",
-    "https://s3.amazonaws.com/files.trilogo.app/grupos/320/63c3e3f4-228a-474b-be07-05063423e91a/49.jpg",
-    "https://s3.amazonaws.com/files.trilogo.app/grupos/320/0feb2f5f-a558-43e2-88ca-22ac28b85005/77.jpg",
-    "https://s3.amazonaws.com/files.trilogo.app/grupos/320/3828ac03-e30a-4ce6-ba07-24cc2071f20d/44.jpg",
-    "https://s3.amazonaws.com/files.trilogo.app/grupos/320/81d879fd-3065-423e-9fc8-15d6efaa0d66/60.jpg",
-    "https://s3.amazonaws.com/files.trilogo.app/grupos/320/c93a456f-d2e9-42bf-9563-dbd91adc11a8/41.jpg",
-    "https://s3.amazonaws.com/files.trilogo.app/grupos/320/cd52435d-0868-4848-9bc7-bf6102b0ddca/48.jpg",
-    "https://s3.amazonaws.com/files.trilogo.app/grupos/320/97d21e96-1177-4737-a460-c7111ac68097/53.jpg",
-    "https://s3.amazonaws.com/files.trilogo.app/grupos/320/c73c0542-7fa2-4d03-9bab-f329dbfd05ae/71.jpg",
-    "https://s3.amazonaws.com/files.trilogo.app/grupos/320/fa2a0030-fb10-4fbf-bc8c-6b2275735550/64.jpg",
-    "https://s3.amazonaws.com/files.trilogo.app/grupos/320/866591cd-88e1-4935-b476-c22751ada56d/73.jpg",
-    "https://s3.amazonaws.com/files.trilogo.app/grupos/320/bb5f8b54-2d46-4af5-a17a-bac4a3b84ca7/75.jpg",
-    "https://s3.amazonaws.com/files.trilogo.app/grupos/320/3be8aee4-cc6d-4c43-adea-85bce3c12b28/40.jpg",
-    "https://s3.amazonaws.com/files.trilogo.app/grupos/320/9c55987b-9f52-44da-a4e0-15eafd2800f2/63.jpg",
-    "https://s3.amazonaws.com/files.trilogo.app/grupos/320/36740ce6-aa28-4795-ab9f-b44e59d3d08b/74.jpg",
-    "https://s3.amazonaws.com/files.trilogo.app/grupos/320/974571c9-137a-42ab-bef9-4296964c00a4/70.jpg"
+     59: "https://s3.amazonaws.com/files.trilogo.app/grupos/320/0fde6629-0fce-49ee-9e21-dae49bd3aa0e/59.jpg",
+     55: "https://s3.amazonaws.com/files.trilogo.app/grupos/320/3b918cbf-3cb6-471d-aa1d-d988175adb9a/55.jpg",
+     65: "https://s3.amazonaws.com/files.trilogo.app/grupos/320/fdd5d8c5-b044-4aa8-b1fa-1983c860fed0/65.jpg",
+     56: "https://s3.amazonaws.com/files.trilogo.app/grupos/320/decc5248-a3f2-4649-8c8f-ac9ada90ed47/56.jpg",
+     54: "https://s3.amazonaws.com/files.trilogo.app/grupos/320/b7af77ad-06db-45b7-b835-2474327ca7a0/54.jpg",
+     72: "https://s3.amazonaws.com/files.trilogo.app/grupos/320/3eb0aa03-b048-4962-a9c8-d2a5ba5b758a/72.jpg",
+     67: "https://s3.amazonaws.com/files.trilogo.app/grupos/320/b5c1383f-0eb0-40d0-a95c-9c7f2cd55d1b/67.jpg",
+     79: "https://s3.amazonaws.com/files.trilogo.app/grupos/320/f5df9608-506c-4471-9395-3341b1bc0432/79.jpg",
+     61: "https://s3.amazonaws.com/files.trilogo.app/grupos/320/15d970ad-4616-4061-8e5e-80ec4580eb01/61.jpg",
+     68: "https://s3.amazonaws.com/files.trilogo.app/grupos/320/8c2aadef-1830-4412-9d8e-1998f3d799e1/68.jpg",
+     47: "https://s3.amazonaws.com/files.trilogo.app/grupos/320/bd31066d-61c0-4d9c-a9a3-7d1e140aa66f/47.jpg",
+     76: "https://s3.amazonaws.com/files.trilogo.app/grupos/320/5535374e-d2a4-4b26-9fce-584a7a743ca9/76.jpg",
+     69: "https://s3.amazonaws.com/files.trilogo.app/grupos/320/8f0e8275-b250-4ea5-bf05-d67a27bc76a8/69.jpg",
+     57: "https://s3.amazonaws.com/files.trilogo.app/grupos/320/3feae063-d0f8-42c4-984e-bd881d48d46b/57.jpg",
+     78: "https://s3.amazonaws.com/files.trilogo.app/grupos/320/0894e093-fb77-4a36-8e93-2338db453379/78.jpg",
+     62: "https://s3.amazonaws.com/files.trilogo.app/grupos/320/f82478a6-f354-44d4-b2e2-0fba27b10d39/62.jpg",
+     58: "https://s3.amazonaws.com/files.trilogo.app/grupos/320/d02eb767-d20d-4b25-9f7b-0cbac2d1bc64/58.jpg",
+     66: "https://s3.amazonaws.com/files.trilogo.app/grupos/320/621e6072-da44-496f-95c3-fa4eb5f378c2/66.jpg",
+     45: "https://s3.amazonaws.com/files.trilogo.app/grupos/320/13d214e6-eb3d-4f56-8808-0dd96ea72605/45.jpg",
+     51: "https://s3.amazonaws.com/files.trilogo.app/grupos/320/8fa12574-31a7-449d-91d9-e28ce655a35e/51.jpg",
+     46: "https://s3.amazonaws.com/files.trilogo.app/grupos/320/6df79605-c6f2-4de4-b0d6-057868310402/46.jpg",
+     52: "https://s3.amazonaws.com/files.trilogo.app/grupos/320/6faa4cfe-3e47-4be1-b94e-59b8dcfbaaaa/52.jpg",
+     43: "https://s3.amazonaws.com/files.trilogo.app/grupos/320/c7208a46-5758-4bd2-83a8-6fdebdf155d7/43.jpg",
+     50: "https://s3.amazonaws.com/files.trilogo.app/grupos/320/58fb2489-131f-4a2f-9bd7-1232138dd284/50.jpg",
+     42: "https://s3.amazonaws.com/files.trilogo.app/grupos/320/26ea08c7-13f8-41a4-9ce0-5d3160eb4933/42.jpg",
+     49: "https://s3.amazonaws.com/files.trilogo.app/grupos/320/63c3e3f4-228a-474b-be07-05063423e91a/49.jpg",
+     77: "https://s3.amazonaws.com/files.trilogo.app/grupos/320/0feb2f5f-a558-43e2-88ca-22ac28b85005/77.jpg",
+     44: "https://s3.amazonaws.com/files.trilogo.app/grupos/320/3828ac03-e30a-4ce6-ba07-24cc2071f20d/44.jpg",
+     60: "https://s3.amazonaws.com/files.trilogo.app/grupos/320/81d879fd-3065-423e-9fc8-15d6efaa0d66/60.jpg",
+     41: "https://s3.amazonaws.com/files.trilogo.app/grupos/320/c93a456f-d2e9-42bf-9563-dbd91adc11a8/41.jpg",
+     48: "https://s3.amazonaws.com/files.trilogo.app/grupos/320/cd52435d-0868-4848-9bc7-bf6102b0ddca/48.jpg",
+     53: "https://s3.amazonaws.com/files.trilogo.app/grupos/320/97d21e96-1177-4737-a460-c7111ac68097/53.jpg",
+     71: "https://s3.amazonaws.com/files.trilogo.app/grupos/320/c73c0542-7fa2-4d03-9bab-f329dbfd05ae/71.jpg",
+     64: "https://s3.amazonaws.com/files.trilogo.app/grupos/320/fa2a0030-fb10-4fbf-bc8c-6b2275735550/64.jpg",
+     73: "https://s3.amazonaws.com/files.trilogo.app/grupos/320/866591cd-88e1-4935-b476-c22751ada56d/73.jpg",
+     75: "https://s3.amazonaws.com/files.trilogo.app/grupos/320/bb5f8b54-2d46-4af5-a17a-bac4a3b84ca7/75.jpg",
+     40: "https://s3.amazonaws.com/files.trilogo.app/grupos/320/3be8aee4-cc6d-4c43-adea-85bce3c12b28/40.jpg",
+     63: "https://s3.amazonaws.com/files.trilogo.app/grupos/320/9c55987b-9f52-44da-a4e0-15eafd2800f2/63.jpg",
+     74: "https://s3.amazonaws.com/files.trilogo.app/grupos/320/36740ce6-aa28-4795-ab9f-b44e59d3d08b/74.jpg",
+     70: "https://s3.amazonaws.com/files.trilogo.app/grupos/320/974571c9-137a-42ab-bef9-4296964c00a4/70.jpg"
 ];
 
             // TODOS OS PADRÕES COMPLETOS
@@ -567,13 +567,13 @@
             };
 
             const nightlords = Object.keys(allPatterns);
-            const patterns = selectedNightlord ? allPatterns[selectedNightlord] : [];
+            const patterns = selectedNightlord ? newPatterns[selectedNightlord] : [];
 
             const spawnGroups = useMemo(() => {
                 const groups = {};
                 patterns.forEach(pattern => {
                     if (!groups[pattern.spawn]) {
-                        groups[pattern.spawn] = [];
+                        groups[pattern.spawn] = []; 
                     }
                     groups[pattern.spawn].push(pattern);
                 });
@@ -587,6 +587,11 @@
             }, [spawnGroups, searchTerm]);
 
             const getImageUrl = (pattern) => {
+
+                if (pattern.spawnUrl) {
+                    return pattern.spawnUrl;
+                }
+
                 const baseUrl = 'https://raw.githubusercontent.com/LucasValpereiro/appnightreign/main/public';
                 const url = `${baseUrl}/${pattern.image}`;
                 console.log('🔍 Tentando carregar:', url);
